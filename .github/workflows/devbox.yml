@@ -37,7 +37,8 @@ jobs:
 
       # Step 4: Upload the generated YAML as an artifact
       - name: Upload YAML artifact
-        uses: actions/upload-artifact@v3
+        id: artifact-upload-step
+        uses: actions/upload-artifact@v4
         with:
           name: devbox-yaml
           path: devbox.yaml
@@ -47,18 +48,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Fetch the current workflow run's artifacts
-          response=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts)
-          
-          # Extract the artifact download URL
-          artifact_url=$(echo $response | jq -r '.artifacts[] | select(.name=="devbox-yaml") | .archive_download_url')
-
           echo "The YAML file has been successfully generated and uploaded."
           echo "To download the artifact, see the link below"
           
-          # Output the artifact URL
-          echo "Artifact URL: $artifact_url"
+          echo 'Artifact URL is ${{ steps.artifact-upload-step.outputs.artifact-url }}'
 
           echo "Once downloaded, upload the customization file when creating a new dev box"
