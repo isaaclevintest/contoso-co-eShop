@@ -43,3 +43,14 @@ properties:
           git config --global credential.msauthUseDefaultAccount true
         GetScript: return $false
         TestScript: return $false
+
+    ### Clone Repo
+    ### -------------------------------------
+    - resource: GitDsc/GitClone
+      directives:
+        description: Clone latest main branch of repository
+        allowPrerelease: true
+      settings:
+        HttpsUrl: https://github.com/isaaclevintest/contoso-co-eShop
+        RootDirectory: z:\src
+        Ensure: Present      
