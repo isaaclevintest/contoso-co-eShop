@@ -32,6 +32,7 @@ jobs:
           echo "    parameters:" >> devbox.yaml
           echo "      command: |" >> devbox.yaml
           echo "        \$env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')" >> devbox.yaml
+          echo "        cd z:\src\contoso-co-eShop" >> devbox.yaml          
           echo "        git fetch origin +refs/pull/${{ github.event.pull_request.number }}/head:pr-${{ github.event.pull_request.number }}" >> devbox.yaml
           echo "        git checkout pr-${{ github.event.pull_request.number }}" >> devbox.yaml
 
@@ -48,9 +49,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "The YAML file has been successfully generated and uploaded."
-          echo "To download the artifact, see the link below"
-          
-          echo 'Artifact URL is ${{ steps.artifact-upload-step.outputs.artifact-url }}'
-
-          echo "Once downloaded, upload the customization file when creating a new dev box"
+          echo "The YAML file has been successfully generated and uploaded." >> $GITHUB_STEP_SUMMARY
+          echo "To download the artifact, see the link below">> $GITHUB_STEP_SUMMARY          
+          echo 'Artifact URL is ${{ steps.artifact-upload-step.outputs.artifact-url }}' >> $GITHUB_STEP_SUMMARY
+          echo "Once downloaded, upload the customization file when creating a new dev box" >> $GITHUB_STEP_SUMMARY
