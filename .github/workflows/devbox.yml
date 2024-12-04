@@ -6,6 +6,7 @@ on:
 
 jobs:
   generate-yaml:
+    name: Generate Dev Box Customization File
     runs-on: ubuntu-latest
 
     steps:
@@ -53,3 +54,4 @@ jobs:
           echo "To download the artifact, see the link below">> $GITHUB_STEP_SUMMARY          
           echo 'Artifact URL is ${{ steps.artifact-upload-step.outputs.artifact-url }}' >> $GITHUB_STEP_SUMMARY
           echo "Once downloaded, upload the customization file when creating a new dev box" >> $GITHUB_STEP_SUMMARY
+          echo "Dev Portal is https://devportal.microsoft.com" >> $GITHUB_STEP_SUMMARY          
