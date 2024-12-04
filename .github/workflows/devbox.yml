@@ -34,6 +34,7 @@ jobs:
           echo "      command: |" >> devbox.yaml
           echo "        \$env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')" >> devbox.yaml
           echo "        cd z:\src\contoso-co-eShop" >> devbox.yaml          
+          echo "        git config --global --add safe.directory Z:/src/contoso-co-eShop" >> devbox.yaml
           echo "        git fetch origin +refs/pull/${{ github.event.pull_request.number }}/head:pr-${{ github.event.pull_request.number }}" >> devbox.yaml
           echo "        git checkout pr-${{ github.event.pull_request.number }}" >> devbox.yaml
 
