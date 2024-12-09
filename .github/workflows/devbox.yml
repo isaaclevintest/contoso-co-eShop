@@ -24,19 +24,7 @@ jobs:
       # Step 3: Create the YAML file
       - name: Create YAML file
         run: |
-          echo "# From https://github.com/microsoft/devcenter-examples" > devbox.yaml
-          echo "\$schema: 1.0" >> devbox.yaml
-          echo "############ Project related Softwares in Dev Box Windows OS ############" >> devbox.yaml
-          echo "" >> devbox.yaml
-          echo "userTasks:" >> devbox.yaml
-          echo "  - name: powershell" >> devbox.yaml
-          echo "    parameters:" >> devbox.yaml
-          echo "      command: |" >> devbox.yaml
-          echo "        \$env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')" >> devbox.yaml
-          echo "        cd z:\src\contoso-co-eShop" >> devbox.yaml          
-          echo "        git config --global --add safe.directory Z:/src/contoso-co-eShop" >> devbox.yaml
-          echo "        git fetch origin +refs/pull/${{ github.event.pull_request.number }}/head:pr-${{ github.event.pull_request.number }}" >> devbox.yaml
-          echo "        git checkout pr-${{ github.event.pull_request.number }}" >> devbox.yaml
+          sed -i "s/{PR_NUMBER}/${{ github.event.pull_request.number }}/g" /.devcenter/customizations/devbox-pr.yaml
 
       # Step 4: Upload the generated YAML as an artifact
       - name: Upload YAML artifact
@@ -44,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: devbox-yaml
-          path: devbox.yaml
+          path: /.devcenter/customizations/devbox-pr.yml
 
       # Step 5: Fetch Artifact URL using GitHub API
       - name: Get Artifact URL
