@@ -1,0 +1,13 @@
+# From https://github.com/microsoft/devcenter-examples" > devbox.yaml
+$schema: 1.0
+############ Project related Softwares in Dev Box Windows OS ############
+
+userTasks:
+  - name: powershell
+    parameters:
+      command: |
+        \$env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')
+        cd z:\src\contoso-co-eShop          
+        git config --global --add safe.directory Z:/src/contoso-co-eShop
+        git fetch origin +refs/pull/{PR_NUMBER}/head:pr-{PR_NUMBER}
+        git checkout pr-{PR_NUMBER}
