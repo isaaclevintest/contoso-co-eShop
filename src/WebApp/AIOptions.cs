@@ -12,5 +12,5 @@ public class OpenAIOptions
     /// <remarks>When using Azure OpenAI, this should be the "Deployment name" of the chat model.</remarks>
     public string ChatModel { get; set; } = "gpt-3.5-turbo-16k";    
 
-    public string ChatModel4 { get; set; } = "gpt-3.5-turbo-16k";    
+    public string ChatModel5 { get; set; } = "gpt-3.5-turbo-16k";    
 }
