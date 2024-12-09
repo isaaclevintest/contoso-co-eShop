@@ -24,7 +24,7 @@ jobs:
       # Step 3: Create the YAML file
       - name: Create YAML file
         run: |
-          sed -i "s/{PR_NUMBER}/${{ github.event.pull_request.number }}/g" /.devcenter/customizations/devbox-pr.yaml
+          sed -i "s/{PR_NUMBER}/${{ github.event.pull_request.number }}/g" ./.devcenter/customizations/devbox-pr.yaml
 
       # Step 4: Upload the generated YAML as an artifact
       - name: Upload YAML artifact
